@@ -179,7 +179,7 @@ export default class LinkedList {
 	getNodesAsArray(): Node[] {
 		let arr = [];
 		let currentNode = this.firstNode;
-		while(currentNode != null) {
+		while (currentNode != null) {
 			arr.push(currentNode);
 			currentNode = currentNode.nextNode;
 		}
@@ -190,8 +190,8 @@ export default class LinkedList {
 		let currentIndex = 0;
 		let lastNode: Node;
 		let currentNode = this.firstNode;
-		while(currentIndex < index) {
-			if(currentNode.nextNode === null) {
+		while (currentIndex < index) {
+			if (currentNode.nextNode === null) {
 				return;
 			}
 
@@ -200,7 +200,7 @@ export default class LinkedList {
 			currentIndex++;
 		}
 
-		if(index ===  0){
+		if (index === 0) {
 			this.firstNode = this.firstNode.nextNode;
 		} else {
 			lastNode.nextNode = currentNode.nextNode;

@@ -46,10 +46,9 @@ test('test clear', () => {
 });
 
 test('project-defined test script', () => {
-	
 	//clear out the predefined values
 	map.clear();
-	 
+
 	map.set('apple', 'red');
 	map.set('banana', 'yellow');
 	map.set('carrot', 'orange');

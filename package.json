@@ -1,20 +1,20 @@
 {
-  "name": "Odin Hash Map",
-  "version": "1.0.0",
-  "description": "",
-  "main": "script.js",
-  "scripts": {
-    "test": "jest",
-    "build": "tsc --build"
-  },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@types/jest": "^29.5.12",
-    "ejs": "^3.1.10",
-    "jest": "^29.7.0",
-    "prettier": "^3.3.2",
-    "ts-jest": "^29.2.0",
-    "typescript": "^5.5.3"
-  }
+	"name": "Odin Hash Map",
+	"version": "1.0.0",
+	"description": "",
+	"main": "script.js",
+	"scripts": {
+		"test": "jest",
+		"build": "tsc --build"
+	},
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@types/jest": "^29.5.12",
+		"ejs": "^3.1.10",
+		"jest": "^29.7.0",
+		"prettier": "^3.3.2",
+		"ts-jest": "^29.2.0",
+		"typescript": "^5.5.3"
+	}
 }

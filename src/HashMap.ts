@@ -14,7 +14,7 @@ export default class HashMap {
 	 * Populate the buckets array with new LinkedLists
 	 */
 	private createBuckets(): void {
-		for(let i = 0; i < this.capacity; i++) {
+		for (let i = 0; i < this.capacity; i++) {
 			this.buckets[i] = new LinkedList();
 		}
 	}
@@ -30,20 +30,23 @@ export default class HashMap {
 		}
 		return hashCode % this.capacity;
 	}
-	
+
 	/**
 	 * Gets the number of non-empty buckets. Used for calculating load and determining when to resize
 	 */
 	private getNonEmptyBucketCount(): number {
-		return this.buckets.reduce((sum, next) => (sum + next.size() > 0) ? 1 : 0, 0);
+		return this.buckets.reduce(
+			(sum, next) => (sum + next.size() > 0 ? 1 : 0),
+			0,
+		);
 	}
 
 	/**
 	 * A helper function to mock index out-of-bounds behavior in less dynamic languages, as described in the prompt
 	 */
 	private getBucket(index: number): LinkedList {
-		if(index < 0 || index >= this.buckets.length) {
-			throw new Error("Trying to access index out of bound");
+		if (index < 0 || index >= this.buckets.length) {
+			throw new Error('Trying to access index out of bound');
 		}
 		return this.buckets[index];
 	}
@@ -56,10 +59,10 @@ export default class HashMap {
 		this.capacity *= 2;
 		this.createBuckets();
 
-		oldBuckets.forEach(bucket => {
-			bucket.getNodesAsArray().forEach(node => {
-				this.set(node.key, node.value)
-			})
+		oldBuckets.forEach((bucket) => {
+			bucket.getNodesAsArray().forEach((node) => {
+				this.set(node.key, node.value);
+			});
 		});
 	}
 
@@ -68,15 +71,17 @@ export default class HashMap {
 	 */
 	public set(key: string, value: string): void {
 		let keyhash = this.hash(key);
-		if(this.getBucket(keyhash).containsKey(key)){
-			let index = this.getBucket(keyhash).getNodeByKey(key)
+		if (this.getBucket(keyhash).containsKey(key)) {
+			let index = this.getBucket(keyhash).getNodeByKey(key);
 			this.getBucket(keyhash).removeNodeAtIndex(index);
-		} 
+		}
 
 		this.getBucket(keyhash).append(key, value);
 
-		if(this.length() > this.capacity * this.LOAD_FACTOR){
-			console.log(`After setting ${key} at length ${this.length()}, resizing`);
+		if (this.length() > this.capacity * this.LOAD_FACTOR) {
+			console.log(
+				`After setting ${key} at length ${this.length()}, resizing`,
+			);
 			this.resize();
 		}
 	}
@@ -84,7 +89,7 @@ export default class HashMap {
 	/**
 	 * Returns the value associated to provided key. If not found, returns null
 	 */
-	public get(key:string): string | null {
+	public get(key: string): string | null {
 		let keyhash = this.hash(key);
 		let nodeIndex = this.getBucket(keyhash).getNodeByKey(key);
 		return this.getBucket(keyhash).at(nodeIndex).value;
@@ -104,7 +109,7 @@ export default class HashMap {
 	public remove(key: string): boolean {
 		let keyhash = this.hash(key);
 		let bucket = this.getBucket(keyhash);
-		if(bucket.containsKey(key)) {
+		if (bucket.containsKey(key)) {
 			let nodeIndex = bucket.getNodeByKey(key);
 			bucket.removeNodeAtIndex(nodeIndex);
 			return true;
@@ -118,7 +123,7 @@ export default class HashMap {
 	 */
 	public length(): number {
 		let count = 0;
-		this.buckets.forEach(bucket => {
+		this.buckets.forEach((bucket) => {
 			count += bucket.size();
 		});
 		return count;
@@ -138,8 +143,8 @@ export default class HashMap {
 	 */
 	public keys(): string[] {
 		let keys = [];
-		this.buckets.forEach(bucket => 
-			keys.push(...bucket.getNodesAsArray().map(node => node.key))
+		this.buckets.forEach((bucket) =>
+			keys.push(...bucket.getNodesAsArray().map((node) => node.key)),
 		);
 		return keys;
 	}
@@ -149,8 +154,8 @@ export default class HashMap {
 	 */
 	public values(): string[] {
 		let values = [];
-		this.buckets.forEach(bucket => 
-			values.push(...bucket.getNodesAsArray().map(node => node.value))
+		this.buckets.forEach((bucket) =>
+			values.push(...bucket.getNodesAsArray().map((node) => node.value)),
 		);
 		return values;
 	}
@@ -161,8 +166,12 @@ export default class HashMap {
 	public entries(): string[][] {
 		let entries = [];
 
-		this.buckets.forEach(bucket => {
-			entries.push(...bucket.getNodesAsArray().map(node => { return [node.key, node.value]}))
+		this.buckets.forEach((bucket) => {
+			entries.push(
+				...bucket.getNodesAsArray().map((node) => {
+					return [node.key, node.value];
+				}),
+			);
 		});
 
 		return entries;

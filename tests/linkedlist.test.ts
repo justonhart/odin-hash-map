@@ -77,16 +77,20 @@ test('getNodeByValue works as expected', () => {
 
 test('toString prints key-value pairs in order, ending with null', () => {
 	expect(list.toString()).toEqual('null');
-	for(let i = 1; i < 6; i++) {
+	for (let i = 1; i < 6; i++) {
 		list.append(i.toString(), i.toString());
 	}
-	expect(list.toString()).toEqual('[1: 1] -> [2: 2] -> [3: 3] -> [4: 4] -> [5: 5] -> null');
+	expect(list.toString()).toEqual(
+		'[1: 1] -> [2: 2] -> [3: 3] -> [4: 4] -> [5: 5] -> null',
+	);
 
 	list = new LinkedList();
-	for(let i = 1; i < 6; i++) {
+	for (let i = 1; i < 6; i++) {
 		list.prepend(i.toString(), i.toString());
 	}
-	expect(list.toString()).toEqual('[5: 5] -> [4: 4] -> [3: 3] -> [2: 2] -> [1: 1] -> null');
+	expect(list.toString()).toEqual(
+		'[5: 5] -> [4: 4] -> [3: 3] -> [2: 2] -> [1: 1] -> null',
+	);
 });
 
 test('removeNodeAtIndex works as expected mid-list', () => {
