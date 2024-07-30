@@ -5,8 +5,9 @@ export default class LinkedList {
 	/**
 	 * Adds a new node containing {value} to the end of the list
 	 */
-	append(value: any): void {
+	append(key: any, value: any): void {
 		const newNode = new Node();
+		newNode.key = key;
 		newNode.value = value;
 		if (this.firstNode === null) {
 			this.firstNode = newNode;
@@ -18,8 +19,9 @@ export default class LinkedList {
 	/**
 	 * Adds a new node containing {value} to the start of the list
 	 */
-	prepend(value: any): void {
+	prepend(key: any, value: any): void {
 		const newNode = new Node();
+		newNode.key = key;
 		newNode.value = value;
 		newNode.nextNode = this.head();
 		this.firstNode = newNode;
@@ -132,12 +134,12 @@ export default class LinkedList {
 	/**
 	 * Returns the index of the node containing the provided value, otherwise null
 	 */
-	getNodeByKey(key: string): Node | null {
+	getNodeByKey(key: string): number | null {
 		let currentIndex = 0;
 		let currentNode = this.firstNode;
 		while (currentNode !== null) {
 			if (currentNode.key === key) {
-				return currentNode;
+				return currentIndex;
 			}
 			currentIndex++;
 			currentNode = currentNode.nextNode;
@@ -148,12 +150,12 @@ export default class LinkedList {
 	/**
 	 * Returns the index of the node containing the provided value, otherwise null
 	 */
-	getNodeByValue(value: string): Node | null {
+	getNodeByValue(value: string): number | null {
 		let currentIndex = 0;
 		let currentNode = this.firstNode;
 		while (currentNode !== null) {
 			if (currentNode.value === value) {
-				return currentNode;
+				return currentIndex;
 			}
 			currentIndex++;
 			currentNode = currentNode.nextNode;
@@ -182,5 +184,26 @@ export default class LinkedList {
 			currentNode = currentNode.nextNode;
 		}
 		return arr;
+	}
+
+	removeNodeAtIndex(index: number): void {
+		let currentIndex = 0;
+		let lastNode: Node;
+		let currentNode = this.firstNode;
+		while(currentIndex < index) {
+			if(currentNode.nextNode === null) {
+				return;
+			}
+
+			lastNode = currentNode;
+			currentNode = currentNode.nextNode;
+			currentIndex++;
+		}
+
+		if(index ===  0){
+			this.firstNode = this.firstNode.nextNode;
+		} else {
+			lastNode.nextNode = currentNode.nextNode;
+		}
 	}
 }
