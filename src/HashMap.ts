@@ -1,8 +1,14 @@
 import LinkedList from './LinkedList';
 export default class HashMap {
-	private capacity: number = 16;
+	private capacity: number;
 	private readonly LOAD_FACTOR: number = 0.75;
 	private buckets: LinkedList[];
+
+	constructor() {
+		this.capacity = 16;
+		this.buckets = [];
+	}
+
 	private hash(key: string): number {
 		let hashCode: number = 0;
 		const primeNumber = 31;
@@ -23,7 +29,7 @@ export default class HashMap {
 	}
 
 	public set(key: string, value: string): void {
-
+		
 	}
 
 	public get(key:string): string {
@@ -43,18 +49,33 @@ export default class HashMap {
 	}
 
 	public clear(): void {
-
+		this.capacity = 16;
+		this.buckets = [];
 	}
 
 	public keys(): string[] {
-		return;
+		let keys = [];
+		this.buckets.forEach(bucket => 
+			keys.push(...bucket.getNodesAsArray().map(node => node.key))
+		);
+		return keys;
 	}
 
 	public values(): string[] {
-		return;
+		let values = [];
+		this.buckets.forEach(bucket => 
+			values.push(...bucket.getNodesAsArray().map(node => node.value))
+		);
+		return values;
 	}
 
 	public entries(): string[][] {
-		return;
+		let entries = [];
+
+		this.buckets.forEach(bucket => {
+			entries.push(...bucket.getNodesAsArray().map(node => { return [node.key, node.value]}))
+		});
+
+		return entries;
 	}
 }
